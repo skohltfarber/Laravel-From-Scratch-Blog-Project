@@ -14,6 +14,15 @@ class Post extends Model
     protected $with = ['category', 'author'];
     // protected $fillable = ['title', 'excerpt', 'body'];
 
+    public function scopeFilter($query, array $filters) // Post::newQuery()->filter()
+    {
+        $query->when($filters['search'] ?? false, fn ($query, $search) =>
+            $query->where('title', 'like', '%'. $filters['search'] . '%')
+            ->orWhere('body', 'like', '%'.  $filters['search']. '%')
+        );
+     
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class);

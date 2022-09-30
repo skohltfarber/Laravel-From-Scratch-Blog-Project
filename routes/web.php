@@ -3,6 +3,7 @@
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\User;
+use App\Http\Controllers\PostController;
 use Spatie\YamlFrontMatter\YamlFrontMatter;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
@@ -19,32 +20,8 @@ use Illuminate\Support\Facades\File;
 |
 */
 
-Route::get('/', function () {
-
-    // \Illuminate\Support\Facades\DB::listen(function ($query) 
-    // {
-    //     logger($query->sql, $query->bindings);
-    // });
-    
-    $posts = Post::latest('published_at');
-
-    if (request('search')) {
-        // Search the DB.
-        $posts->where('title', 'like', '%'. request('search') . '%')
-        ->orWhere('body', 'like', '%'. request('search') . '%');
-    }
-    // dd($posts->count());
-    return view('posts', [
-        'posts' => $posts->get(),
-        'categories' => Category::all(),
-    ]);
-})->name('home');
-
-Route::get('posts/{post:slug}', function (Post $post) {
-
-    return view('post', ['post' => $post]);
-
-});
+Route::get('/', [PostController::class, 'index'])->name('home');
+Route::get('posts/{post:slug}', [PostController::class, 'show']);
 
 Route::get('categories/{category:slug}', function (Category $category) {
 
