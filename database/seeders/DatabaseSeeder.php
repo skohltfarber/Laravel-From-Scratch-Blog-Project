@@ -32,12 +32,12 @@ class DatabaseSeeder extends Seeder
             'slug' => 'family'
         ]);
 
-        Post::factory(5)->create([
+        Post::factory(10)->create([
             'user_id' => $user->id,
             'category_id' => $family->id, 
         ]);
 
-        Post::factory(5)->create(); 
+        Post::factory(20)->create(); 
 
         // $user = User::factory(3)->create();
 
