@@ -1,6 +1,8 @@
 # Laravel From Scratch Blog Demo Project
 
 We are working through the example here https://github.com/JeffreyWay/Laravel-From-Scratch-Blog-Project. 
+
+# Where you can watch the videos. 
 http://laravelfromscratch.com
 
 ## Installation
