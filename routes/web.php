@@ -25,11 +25,17 @@ Route::get('/', function () {
     // {
     //     logger($query->sql, $query->bindings);
     // });
+    
+    $posts = Post::latest('published_at');
 
-    $posts = Post::latest('published_at')->get();
-
+    if (request('search')) {
+        // Search the DB.
+        $posts->where('title', 'like', '%'. request('search') . '%')
+        ->orWhere('body', 'like', '%'. request('search') . '%');
+    }
+    // dd($posts->count());
     return view('posts', [
-        'posts' => $posts,
+        'posts' => $posts->get(),
         'categories' => Category::all(),
     ]);
 })->name('home');
