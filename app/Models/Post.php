@@ -16,6 +16,7 @@ class Post extends Model
 
     public function scopeFilter($query, array $filters) // Post::newQuery()->filter()
     {
+        // Query bug was fixed in v-42 branch. We needed to add an additional where clause. 
         $query->when($filters['search'] ?? false, fn ($query, $search) =>
             $query->where(fn($query) => 
                 $query->where('title', 'like', '%'. $filters['search'] . '%')
