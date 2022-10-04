@@ -9,7 +9,7 @@ class PostController extends Controller
 {
     public function index() {
 
-        $posts = Post::latest('published_at')->filter(request(['search','category','author']))->get();
+        $posts = Post::latest('published_at')->filter(request(['search','category','author']))->paginate(6)->withQueryString();
 
         return view('posts.index', [
             'posts' => $posts,
