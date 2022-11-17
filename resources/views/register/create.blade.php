@@ -18,6 +18,10 @@
                            id="name"
                            require
                     >
+
+                    @error('name')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div class="mb-6">
 
@@ -33,6 +37,10 @@
                            id="username"
                            require
                     >
+
+                    @error('username')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
                 
                 </div>
                 <div class="mb-6">
@@ -49,7 +57,10 @@
                            id="email"
                            require
                     >
-                
+
+                    @error('email')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div class="mb-6">
                     
@@ -65,6 +76,11 @@
                            id="password"
                            require
                     >
+                    
+                    @error('password')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
+
                 </div>
                 <div class="mb-6">
                     <button type="Submit"
@@ -72,6 +88,14 @@
                     >
                         Submit
                     </button>
+
+                    @if ($errors->any())
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li class"text-red-500 text-xs">{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    @endif 
                 </div>
             </form>   
         </main>
